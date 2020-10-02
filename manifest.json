@@ -7,6 +7,10 @@
         "48": "icons/tabsaver_48.png",
         "96": "icons/tabsaver_96.png"
     },
+    "permissions": [
+        "tabs",
+        "sessions"
+    ],
     "background": {
         "scripts": [
             "tabsaver.js"
