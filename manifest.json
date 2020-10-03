@@ -9,13 +9,9 @@
     },
     "permissions": [
         "tabs",
-        "sessions"
+        "sessions",
+        "storage"
     ],
-    "background": {
-        "scripts": [
-            "tabsaver.js"
-        ]
-    },
     "browser_action": {
         "default_icon": "icons/tabsaver_32.png",
         "default_title": "tabsaver",
