@@ -1,16 +1,17 @@
 const load = document.querySelector("#load");
 const save = document.querySelector("#save");
 const input = document.querySelector("#input");
-let userInput = null;
-
-
-console.log("loaded");
+const selection = document.querySelector("select");
+const refresh = document.querySelector("#refresh");
+let userTextInput = null;
+let userSelectInput = null;
 
 save.addEventListener("click", () => {
     save.style.backgroundColor = "red";
     let querying = browser.tabs.query({currentWindow: true});
     querying.then(saveTabs, onError);
     save.style.backgroundColor = "red";
+    loadSessions();
 });
 
 load.addEventListener("click", async () => {
@@ -21,10 +22,16 @@ load.addEventListener("click", async () => {
 
 input.addEventListener("blur", saveInput, true);
 
+selection.addEventListener("blur", saveSessionInput, true);
+
+refresh.addEventListener("click", () => {
+    loadSessions();
+});
+
 function saveTabs(tabs) {
     let urls = getUrls(tabs);
     let contentToStore = {};
-    let key = (userInput) ? userInput : '0';
+    let key = (userTextInput) ? userTextInput : '0';
     contentToStore[key] = urls;
     browser.storage.local.set(contentToStore);
 }
@@ -42,8 +49,14 @@ function onError(error) {
 }
 
 async function loadUrls() {
-    let urls = await browser.storage.local.get('0');
-    return urls['0'];
+    if(userSelectInput) {
+        let urls = await browser.storage.local.get(userSelectInput);
+        alert(urls[userSelectInput]);
+        return urls[userSelectInput];
+    }
+    else {
+        alert("No session selected");
+    }
 }
 
 function createTabs(urls) {
@@ -58,6 +71,21 @@ function onCreated(tab) {
 
 function saveInput() {
     save.style.backgroundColor = "green";
-    userInput = input.value;
+    userTextInput = input.value;
 }
-  
+
+async function loadSessions() {
+    let sessions = await browser.storage.local.get(null)
+    for(let key in sessions)  {
+        // alert(key);
+        // alert(sessions[key]);
+        let option = document.createElement("option");
+        option.setAttribute("value", key);
+        option.textContent = key;
+        selection.appendChild(option);
+    }
+}
+
+function saveSessionInput() {
+    userSelectInput = selection.value;
+}  
