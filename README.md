@@ -7,7 +7,7 @@ This extension is still a WIP
 3. Select load temporary add-on
 4. Select manifest.json
 ## Usage
-- Press save to save all tabs of the currently active window
-- Type in a key to save the tabs under, default is '0'
-- Load will load all tabs saved under the chosen key onto the current window
+- Save will store all tabs of the currently active window under the given key
+- Default key is '0'
+- Load will open all tabs saved under the chosen key onto the current window
 - Press R to refresh keys
