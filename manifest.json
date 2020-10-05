@@ -15,6 +15,6 @@
     "browser_action": {
         "default_icon": "icons/tabsaver_32.png",
         "default_title": "tabsaver",
-        "default_popup": "tabsaver.html"
+        "default_popup": "popup/tabsaver.html"
     }
 }
