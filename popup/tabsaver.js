@@ -51,7 +51,6 @@ function onError(error) {
 async function loadUrls() {
     if(userSelectInput) {
         let urls = await browser.storage.local.get(userSelectInput);
-        alert(urls[userSelectInput]);
         return urls[userSelectInput];
     }
     else {
@@ -77,8 +76,6 @@ function saveInput() {
 async function loadSessions() {
     let sessions = await browser.storage.local.get(null)
     for(let key in sessions)  {
-        // alert(key);
-        // alert(sessions[key]);
         let option = document.createElement("option");
         option.setAttribute("value", key);
         option.textContent = key;
